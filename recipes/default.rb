@@ -23,5 +23,30 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+node.set['nginx']['default_site_enabled'] = false
 
 include_recipe 'nginx'
+include_recipe 'git'
+
+directory '/var/www' do
+  action :create
+  owner 'www-data'
+  group 'www-data'
+end
+
+git node['magic']['directory'] do
+  user 'www-data'
+  group 'www-data'
+  reference 'master'
+  repo 'git://github.com/TAMUArch/magic'
+end
+
+template '/etc/nginx/sites-available/magic' do
+  action :create
+  source 'magic.conf'
+  notifies :reload, 'service[nginx]'
+end
+
+nginx_site 'magic' do
+  action :enable
+end

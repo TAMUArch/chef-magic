@@ -3,6 +3,18 @@ Magic Cookbook
 Chef Cookbook to deploy magic.arch.tamu.edu.  This is a sample site for
 a talk about Chef.
 
+To bring up your own test box with Vagrant you need to install Vagrant from
+http://www.vagrantup.com and Virtualbox from https://www.virtualbox.org.
+
+Once you have those installed run the following commands:
+
+vagrant plugin install vagrant-berkshelf
+vagrant plugin install vagrant-omnibus
+vagrant up
+
+You should now have the sample site running on your local box and may view 
+it by visiting http://localhost:8080
+
 Requirements
 ------------
 
@@ -23,6 +35,12 @@ Attributes
   </tr>
   <tr>
     <td><tt>['magic']['directory']</tt></td>
+    <td>String</td>
+    <td>Directory to install site to</td>
+    <td><tt>/var/www/magic</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['magic']['server_name']</tt></td>
     <td>String</td>
     <td>Directory to install site to</td>
     <td><tt>/var/www/magic</tt></td>
