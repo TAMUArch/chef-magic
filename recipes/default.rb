@@ -29,6 +29,12 @@ include_recipe 'nginx::repo'
 include_recipe 'nginx'
 include_recipe 'git'
 
+%w(default.conf example_ssl.conf).each do |f|
+  file ::File.join('/etc/nginx/conf.d', f) do
+    action :delete
+  end
+end
+
 directory '/var/www' do
   action :create
   owner 'www-data'
