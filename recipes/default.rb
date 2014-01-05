@@ -25,6 +25,7 @@
 #
 node.set['nginx']['default_site_enabled'] = false
 
+include_recipe 'nginx::repo'
 include_recipe 'nginx'
 include_recipe 'git'
 
